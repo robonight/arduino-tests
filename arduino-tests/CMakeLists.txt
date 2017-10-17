@@ -18,7 +18,7 @@ message ("=================== adding libraries for aduino mocks")
 add_library(arduino_mock STATIC ${SRC})
 
 target_include_directories(arduino_mock
-    PUBLIC "include"
+    PUBLIC "mock/include"
 )
 
 target_link_libraries(arduino_mock
