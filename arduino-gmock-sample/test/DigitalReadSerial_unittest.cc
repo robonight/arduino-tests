@@ -12,10 +12,14 @@ TEST(loop, pushed) {
   ArduinoMock* arduinoMock = arduinoMockInstance();
   SerialMock* serialMock = serialMockInstance();
   EXPECT_CALL(*arduinoMock, digitalRead(2))
-    .WillOnce(Return(1));
-  EXPECT_CALL(*serialMock, println(1, 10));
+    .WillOnce(Return(0)).WillOnce(Return(1));
+  EXPECT_CALL(*arduinoMock, digitalWrite(13, LOW));
+  EXPECT_CALL(*arduinoMock, delay(1));
+  loop();
+  EXPECT_CALL(*arduinoMock, digitalWrite(13, HIGH));
   EXPECT_CALL(*arduinoMock, delay(1));
   loop();
   releaseSerialMock();
   releaseArduinoMock();
 }
+
